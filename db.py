@@ -57,7 +57,7 @@ async def db_delete_single_todo(id: str) -> Union[dict, bool]:
   if todo:
     deleted_todo = await cll_todos.delete_one( 
       # update_one() return UpdateResult class
-      {'_id': ObjectId(id)}, {"$set": data}
+      {'_id': ObjectId(id)}
     )
     if deleted_todo.deleted_count > 0:
     # UpdateResult class has deleted_count attribute
