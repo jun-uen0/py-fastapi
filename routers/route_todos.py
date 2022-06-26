@@ -1,8 +1,8 @@
 from fastapi import APIRouter
 from fastapi import Request, Response, HTTPException
 from fastapi.encoders import jsonable_encoder
-from schemas import Todo, TodoBody
-from db import db_create_todo, db_get_todos, db_get_single_todo
+from schemas import Todo, TodoBody, SuccessMsg
+from db import db_create_todo, db_get_todos, db_get_single_todo, db_update_single_todo, db_delete_single_todo
 from typing import List
 # from starlette import HTTP_201_CREATED
 
@@ -36,3 +36,24 @@ async def get_single_todo(request: Request, response: Response, id: str):
     return res
   raise HTTPException(
     status_code=404, detail=f"Get todo of id:{id} failed")
+
+@router.put("/api/todo/{id}", response_model=Todo)
+async def update_single_todo(request: Request, response: Response, id: str, data: TodoBody):
+  # Here CSRF Token handling logic can be added
+  # Set cookie
+  todo = jsonable_encoder(data)
+  res = await db_update_single_todo(id,todo)
+  if res:
+    return res
+  raise HTTPException(
+    status_code=404, detail=f"Update todo of id:{id} failed")
+
+@router.delete("/api/todo/{id}", response_model=SuccessMsg)
+async def delete_single_todo(request: Request, response: Response, id: str):
+  # Here CSRF Token handling logic can be added
+  # Set cookie
+  res = await db_delete_single_todo(id)
+  if res:
+    return {'message': 'Successfully deleted'}
+  raise HTTPException(
+    status_code=404, detail=f"Delete todo of id:{id} failed")

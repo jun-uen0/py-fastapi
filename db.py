@@ -39,7 +39,7 @@ async def db_get_single_todo(id: str) -> Union[dict, bool]:
   return False
 
 async def db_update_single_todo(id: str, data: dict) -> Union[dict, bool]:
-  todo = await cll_todos.find({'_id': ObjectId(id)})
+  todo = await cll_todos.find_one({'_id': ObjectId(id)})
   if todo: 
     # continue if todo is not None
     updated_todo = await cll_todos.update_one( 
@@ -49,10 +49,11 @@ async def db_update_single_todo(id: str, data: dict) -> Union[dict, bool]:
     if updated_todo.modified_count > 0: 
       # UpdateResult class has modified_count attribute
       # If the modified_count is larger than zero, the update was successful
-      return todo_serializer(await cll_todos.find_one({'_id': ObjectId(id)}))
+      new_todo = await cll_todos.find_one({"_id": ObjectId(id)})
+      return todo_serializer(new_todo)
   return False
 
-async def db_delete_single_todo(id: str) -> Union[dict, bool]:
+async def db_delete_single_todo(id: str) -> bool:
   todo = await cll_todos.delete_one({'_id': ObjectId(id)})
   if todo:
     deleted_todo = await cll_todos.delete_one( 
@@ -60,7 +61,7 @@ async def db_delete_single_todo(id: str) -> Union[dict, bool]:
       {'_id': ObjectId(id)}
     )
     if deleted_todo.deleted_count > 0:
-    # UpdateResult class has deleted_count attribute
-    # If the deleted_count is larger than zero, the delete was successful
+      # UpdateResult class has deleted_count attribute
+      # If the deleted_count is larger than zero, the delete was successful
       return True
   return False
