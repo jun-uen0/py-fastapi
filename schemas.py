@@ -11,3 +11,7 @@ class TodoBody(BaseModel):
 
 class SuccessMsg(BaseModel):
   message: str
+
+class Userinfo(BaseModel):
+  id: Optional[str] = None
+  email: str
