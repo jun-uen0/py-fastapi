@@ -13,6 +13,10 @@ class TodoBody(BaseModel):
 class SuccessMsg(BaseModel):
   message: str
 
-class Userinfo(BaseModel):
+class UserInfo(BaseModel):
   id: Optional[str] = None
   email: str
+
+class UserBody(BaseModel):
+  email: str
+  password: str
