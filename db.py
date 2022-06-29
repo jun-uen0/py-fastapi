@@ -24,6 +24,12 @@ def todo_serializer(todo: dict) -> dict:
     "description": todo["description"]
   }
 
+def user_serializer(user) -> dict:
+  return {
+    "id": str(user["_id"]),
+    "email": user["email"],
+  }
+
 async def db_create_todo(todo: dict) -> Union[dict, bool]:
   todo = await cll_todos.insert_one(todo)
   new_todo = await cll_todos.find_one({'_id': todo.inserted_id})
@@ -80,12 +86,12 @@ async def db_signup(data: dict) -> dict: # return user data
   if overlap_user:
     raise HTTPException(status_code=400, detail={'message': 'Email already in use'})
   # Check if password is zero or less than 6 characters
-  if not password or len(password) > 6:
+  if not password or len(password) < 6:
     raise HTTPException(status_code=400, detail={'message': 'Password is too short'})
   # Insert user with email and hashed password
-  user = await cll_users.insert_one({'email': email, 'password': auth.generate_hashed_pw(password)})
-  new_user = await cll_users.find_one({'_id': user.inserted_id}) # insert_one has inserted_id attribute
-  return todo_serializer(new_user)
+  user = await cll_users.insert_one({"email": email, "password": auth.generate_hashed_pw(password)})
+  new_user = await cll_users.find_one({"_id": user.inserted_id})
+  return user_serializer(new_user)
 
 async def db_login(data: dict) -> dict: # return JWT token
   email = data.get('email')
