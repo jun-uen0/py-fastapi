@@ -10,7 +10,7 @@ from auth_utils import AuthJwtCsrf
 router = APIRouter()
 auth = AuthJwtCsrf()
 
-@router.post("/api/todo", response_model=Todo)
+@router.post('/api/todo', response_model=Todo)
 async def create_todo(request: Request, response: Response, data: TodoBody, csrf_protect: CsrfProtect = Depends()):
   # Verify the CSRF token
   new_token = auth.verify_csrf_update_jwt(request, csrf_protect, request.headers)
@@ -27,18 +27,18 @@ async def create_todo(request: Request, response: Response, data: TodoBody, csrf
   if res:
     return res
   else:
-    return HTTPException(status_code=404, detail="Todo creation failed")
+    return HTTPException(status_code=404, detail='Todo creation failed')
 
-@router.get("/api/todos", response_model=List[Todo])
+@router.get('/api/todos', response_model=List[Todo])
 async def get_todos(request: Request):
   auth.verity_jwt(request)
   res = await db_get_todos()
   if res:
     return res
   raise HTTPException(
-    status_code=404, detail="Get todos failed")
+    status_code=404, detail='Get todos failed')
 
-@router.get("/api/todo/{id}", response_model=Todo)
+@router.get('/api/todo/{id}', response_model=Todo)
 async def get_single_todo(request: Request, response: Response, id: str):
   new_token,_ = auth.verify_csrf_update_jwt(request) # _ is a payload. We don't need it here
   res = await db_get_single_todo(id)
@@ -52,9 +52,9 @@ async def get_single_todo(request: Request, response: Response, id: str):
   if res:
     return res
   raise HTTPException(
-    status_code=404, detail=f"Get todo of id:{id} failed")
+    status_code=404, detail=f'Get todo of id:{id} failed')
 
-@router.put("/api/todo/{id}", response_model=Todo)
+@router.put('/api/todo/{id}', response_model=Todo)
 async def update_single_todo(request: Request, response: Response, id: str, data: TodoBody, csrf_protect: CsrfProtect = Depends()):
   new_token = auth.verify_csrf_update_jwt(request, csrf_protect, request.headers)
   todo = jsonable_encoder(data)
@@ -69,9 +69,9 @@ async def update_single_todo(request: Request, response: Response, id: str, data
   if res:
     return res
   raise HTTPException(
-    status_code=404, detail=f"Update todo of id:{id} failed")
+    status_code=404, detail=f'Update todo of id:{id} failed')
 
-@router.delete("/api/todo/{id}", response_model=SuccessMsg)
+@router.delete('/api/todo/{id}', response_model=SuccessMsg)
 async def delete_single_todo(request: Request, response: Response, id: str):
   new_token = auth.verify_csrf_update_jwt(request)
   res = await db_delete_single_todo(id)
@@ -85,4 +85,4 @@ async def delete_single_todo(request: Request, response: Response, id: str):
   if res:
     return res
   raise HTTPException(
-    status_code=404, detail=f"Delete todo of id:{id} failed")
+    status_code=404, detail=f'Delete todo of id:{id} failed')

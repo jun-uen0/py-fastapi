@@ -9,22 +9,22 @@ from fastapi_csrf_protect.exceptions import CsrfProtectError
 app = FastAPI()
 app.include_router(route_todos.router)
 app.include_router(route_auth.router)
-origins = ["https://localhost:3000"] # CORS White List
+origins = ['https://localhost:3000'] # CORS White List
 app.add_middleware(
   CORSMiddleware,
   allow_origins=origins,
   allow_credentials=True,
-  allow_methods=["*"],
-  allow_headers=["*"],
+  allow_methods=['*'],
+  allow_headers=['*'],
 )
 
 @CsrfProtect.load_config
 def get_csrf_config():
   return CsrfSettings()
 
-@app.get("/", response_model=SuccessMsg) # Responce Type: SuccessMsg
+@app.get('/', response_model=SuccessMsg) # Responce Type: SuccessMsg
 def root():
-  return {"message": "← defined in schemas.py"}
+  return {'message': '← defined in schemas.py'}
 
 @app.exception_handler(CsrfProtectError)
 def csrf_protect_exception_handler(request: Request, exc: CsrfProtectError):
