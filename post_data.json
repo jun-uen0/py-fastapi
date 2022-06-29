@@ -1,4 +1,4 @@
 {
-  'title': 'Learn React 18 and FastAPI',
-  'description': 'React 18 adds support for Suspense on server. With the help of suspense, you can wrap a slow part of your app within the Suspense component, telling React to delay the loading of the slow component. This can also be used to specify a loading state that can be shown while it's loading.'
+  "title": "Learn React 18 and FastAPI",
+  "description": "React 18 adds support for Suspense on server. With the help of suspense, you can wrap a slow part of your app within the Suspense component, telling React to delay the loading of the slow component. This can also be used to specify a loading state that can be shown while it's loading."
 }
