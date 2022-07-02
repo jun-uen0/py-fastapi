@@ -5,3 +5,6 @@ https://www.udemy.com/course/farm-stack-react-fastapi/
 
 - Official Doc
 https://fastapi.tiangolo.com
+
+- Reference for Dockerizeing FastAPI app
+https://github.com/dgonzo27/fastapi-demo
