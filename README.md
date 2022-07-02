@@ -5,3 +5,7 @@ https://www.udemy.com/course/farm-stack-react-fastapi/
 
 - Official Doc
 https://fastapi.tiangolo.com
+
+- Deployment
+Firebase (version: 11.2.0)
+
