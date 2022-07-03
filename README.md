@@ -6,7 +6,7 @@ A few changes, but basically followed the course
 https://www.udemy.com/course/farm-stack-react-fastapi/   
 (The course is taught in Japanese)
 
-## Usage
+## Run container in local
 ---
 Create your MongoDB database and collection    
   - database: api_db   
@@ -28,6 +28,13 @@ docker compose up
 ``` 
 Open your browser and go to http://localhost:8000/ and see `{"message":"Welcome to Fast API"}`   
 Go to http://localhost:8000/docs/ and see the API documentation    
+
+
+## Build and Push the image to ECR
+---
+```shell
+bash deploy.sh
+```
 
 ## Other  
 --- 
