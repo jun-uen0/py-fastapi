@@ -42,7 +42,7 @@ class AuthJwtCsrf():
     except jwt.InvalidTokenError:
       raise HTTPException(status_code=401, detail='Invalid token')
     
-  def verity_jwt(self,request):
+  def verify_jwt(self,request):
     # Get access token from Cookie
     token = request.cookies.get('access_token')
     if not token:
