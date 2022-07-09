@@ -19,13 +19,10 @@ MONGO_API_KEY=mongodb+srv://<User Name>:<User Password>@<Datebase Name>.<somethi
 CSRF_KEY=<Your Csrf Key>
 JWT_KEY=<Your Jwt Key>
 ```
-Build and Run the container
+Build and Run the container in local
 ```shell
-docker compose build
+docker compose up --build
 ```
-```shell
-docker compose up
-``` 
 Open your browser and go to http://localhost:8000/ and see `{"message":"Welcome to Fast API"}`   
 Go to http://localhost:8000/docs/ and see the API documentation    
 
