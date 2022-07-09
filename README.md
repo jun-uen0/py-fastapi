@@ -1,13 +1,11 @@
 # Rest API server with FastAPI and MongoDB
 ## About
----
 Making FARM app server with Python and MongoDB   
 A few changes, but basically followed the course   
 https://www.udemy.com/course/farm-stack-react-fastapi/   
 (The course is taught in Japanese)
 
 ## Run container in local
----
 Create your MongoDB database and collection    
   - database: api_db   
   - collection1: users   
@@ -26,18 +24,28 @@ docker compose up --build
 Open your browser and go to http://localhost:8000/ and see `{"message":"Welcome to Fast API"}`   
 Go to http://localhost:8000/docs/ and see the API documentation    
 
+## Activate to / Deactivate from virtual env
+```shell
+# /server/
+# Activate
+source env_api/bin/activate
+
+# Deactivate
+deactivate
+```
 
 ## Build and Push the image to ECR
----
 ```shell
 bash deploy.sh
 ```
 
 ## Other  
---- 
 
 Official Doc  
 https://fastapi.tiangolo.com
 
 Reference for Dockerizeing FastAPI app
 https://github.com/dgonzo27/fastapi-demo
+
+Heroku CLI
+https://devcenter.heroku.com/articles/heroku-cli
