@@ -8,7 +8,7 @@ from auth_utils import AuthJwtCsrf
 MONGO_API_KEY = config('MONGO_API_KEY')
 
 client = motor.motor_asyncio.AsyncIOMotorClient(MONGO_API_KEY)
-database = client.FastAPI01
+database = client.api_db
 collection_todo = database.todos
 collection_user = database.users
 auth = AuthJwtCsrf()
