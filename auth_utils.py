@@ -15,7 +15,7 @@ class AuthJwtCsrf():
   def generate_hashed_pw(selt, pw):
     return selt.pwd_ctx.hash(pw)
   
-  def verity_pw(self,plain_pw, hashed_pw):
+  def verify_pw(self,plain_pw, hashed_pw):
     return self.pwd_ctx.verify(plain_pw, hashed_pw)
   
   def encode_jwt(self,email):
