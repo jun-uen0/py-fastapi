@@ -24,6 +24,7 @@ docker compose up --build
 Open your browser and go to http://localhost:8000/ and see `{"message":"Welcome to Fast API"}`   
 Go to http://localhost:8000/docs/ and see the API documentation    
 
+<<<<<<< HEAD
 ## Run Fast API in local
 For the first time, you need to change the permission
 ```zsh
@@ -37,6 +38,8 @@ Run script by command below
 ```
 Then access to http://127.0.0.1:8000   
 You can see `{"message":"Welcome to Fast API"}` at the page
+=======
+>>>>>>> ff0d9b1eb815b8034ef76e605cd9f5367a658217
 ## Activate to / Deactivate from virtual env
 ```shell
 # /server/

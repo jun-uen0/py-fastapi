@@ -12,10 +12,17 @@ class AuthJwtCsrf():
   pwd_ctx = CryptContext(schemes=['bcrypt'], deprecated='auto')
   secret_key = JWT_KEY
 
+<<<<<<< HEAD
   def generate_hashed_pw(self, password) -> str:
     return self.pwd_ctx.hash(password)
 
   def verify_pw(self,plain_pw, hashed_pw) -> bool:
+=======
+  def generate_hashed_pw(selt, pw):
+    return selt.pwd_ctx.hash(pw)
+  
+  def verify_pw(self,plain_pw, hashed_pw):
+>>>>>>> ff0d9b1eb815b8034ef76e605cd9f5367a658217
     return self.pwd_ctx.verify(plain_pw, hashed_pw)
 
   def encode_jwt(self,email) -> str:
@@ -42,7 +49,11 @@ class AuthJwtCsrf():
     except jwt.InvalidTokenError as e: # Added 'as e' to catch the exception
       raise HTTPException(status_code=401, detail='Invalid token')
     
+<<<<<<< HEAD
   def verify_jwt(self,request) -> str:
+=======
+  def verify_jwt(self,request):
+>>>>>>> ff0d9b1eb815b8034ef76e605cd9f5367a658217
     # Get access token from Cookie
     token = request.cookies.get('access_token')
     if not token:
